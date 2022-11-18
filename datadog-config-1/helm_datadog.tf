@@ -1,0 +1,84 @@
+provider "helm" {
+  kubernetes {
+    host                   = data.aws_eks_cluster.cluster.endpoint
+    cluster_ca_certificate = base64decode(data.aws_eks_cluster.cluster.certificate_authority.0.data)
+    exec {
+      api_version = "client.authentication.k8s.io/v1beta1"
+      args        = ["eks", "get-token", "--cluster-name", data.aws_eks_cluster.cluster.name]
+      command     = "aws"
+    }
+  }
+}
+
+resource "helm_release" "datadog_agent" {
+  name       = "datadog-agent"
+  chart      = "datadog"
+  repository = "https://helm.datadoghq.com"
+  version    = "3.3.1"
+  namespace  = kubernetes_namespace.beacon.id
+
+  set_sensitive {
+    name  = "datadog.apiKey"
+    value = var.datadog_api_key
+  }
+
+  set {
+    name  = "datadog.logs.enabled"
+    value = true
+  }
+
+  set {
+    name  = "datadog.logs.containerCollectAll"
+    value = true
+  }
+
+  set {
+    name  = "datadog.leaderElection"
+    value = true
+  }
+
+  set {
+    name  = "datadog.collectEvents"
+    value = true
+  }
+
+  set {
+    name  = "clusterAgent.enabled"
+    value = true
+  }
+
+  set {
+    name  = "clusterAgent.metricsProvider.enabled"
+    value = true
+  }
+
+  set {
+    name  = "networkMonitoring.enabled"
+    value = true
+  }
+
+  set {
+    name  = "systemProbe.enableTCPQueueLength"
+    value = true
+  }
+
+  set {
+    name  = "systemProbe.enableOOMKill"
+    value = true
+  }
+
+  set {
+    name  = "securityAgent.runtime.enabled"
+    value = true
+  }
+
+  set {
+    name  = "datadog.hostVolumeMountPropagation"
+    value = "HostToContainer"
+  }
+  set {
+    name  = "datadog.cluster_name"
+    value = "ecommerce"
+  }
+}
+
