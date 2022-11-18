@@ -1,11 +1,11 @@
 variable "application_name" {
   type        = string
   description = "Application Name"
-  default     = "beacon"
+  #default     = "beacon"
 }
 variable "aws_region" {
   type    = string
-  default = "us-east-1"
+  #default = "us-east-1"
 }
 
 variable "datadog_api_key" {
@@ -16,6 +16,10 @@ variable "datadog_api_key" {
 variable "datadog_app_key" {
   type        = string
   description = "Datadog Application Key"
+}
+
+variable "org_name" {
+  type = string
 }
 
 

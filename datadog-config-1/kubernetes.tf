@@ -4,10 +4,13 @@
 # # To learn how to schedule deployments and services using the provider, go here: https://learn.hashicorp.com/terraform/kubernetes/deploy-nginx-kubernetes
 
 data "terraform_remote_state" "eks" {
-  backend = "local"
+  backend = "remote"
 
   config = {
-    path = "../learn-terraform-provision-eks-cluster/terraform.tfstate"
+    organization = var.org_name
+    workspaces = {
+      name = "eks-clusters"
+    }
   }
 }
 
