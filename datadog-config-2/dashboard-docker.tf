@@ -2,7 +2,7 @@
 resource "datadog_dashboard_json" "dashboard_json" {
   dashboard = <<EOF
 {
-  "title": "Docker - eCommerce Containers",
+  "title": "eCommerce Containers",
   "description": "For containers related to eCommerce service",
   "widgets": [
     {
