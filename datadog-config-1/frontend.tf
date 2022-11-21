@@ -139,8 +139,7 @@ resource "kubernetes_manifest" "service_frontend" {
 
 resource "null_resource" "exampleA" {
   provisioner "local-exec" {
-    command = "aws eks --region ${var.aws_region}  update-kubeconfig  --name ${data.aws_eks_cluster.cluster.name} \ 
-    && kubectl get svc frontend -o json | jq .status.loadBalancer.ingress[0].hostname >> frontend.txt"
+    command = "aws eks --region ${var.aws_region}  update-kubeconfig  --name ${data.aws_eks_cluster.cluster.name} && kubectl get svc frontend -o json | jq .status.loadBalancer.ingress[0].hostname >> frontend.txt"
   }
   depends_on = [kubernetes_manifest.service_frontend]
 }
