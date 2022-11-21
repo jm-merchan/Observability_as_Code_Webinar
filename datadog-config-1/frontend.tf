@@ -136,6 +136,7 @@ resource "kubernetes_manifest" "service_frontend" {
   }
 }
 
+/*
 resource "null_resource" "exampleA" {
   provisioner "local-exec" {
     command = "aws eks --region ${var.aws_region}  update-kubeconfig  --name ${data.aws_eks_cluster.cluster.name}"
@@ -160,3 +161,4 @@ data "local_file" "frontend-fqdn" {
 output "frontend-fqdn" {
   value = data.local_file.frontend-fqdn.content
 }
+*/
