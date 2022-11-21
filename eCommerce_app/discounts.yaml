@@ -6,6 +6,7 @@ metadata:
     service: discounts
     tags.datadoghq.com/env: "development"
   name: discounts
+  # namespace: beacon
 spec:
   replicas: 1
   selector:
@@ -67,6 +68,7 @@ metadata:
     service: discounts
     app: ecommerce
   name: discounts
+  # namespace: beacon
 spec:
   ports:
   - port: 5001

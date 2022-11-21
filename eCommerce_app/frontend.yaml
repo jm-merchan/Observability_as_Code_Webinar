@@ -6,6 +6,7 @@ metadata:
     app: ecommerce
     tags.datadoghq.com/env: "development"
   name: frontend
+  # namespace: beacon
 spec:
   replicas: 1
   selector:
@@ -73,6 +74,7 @@ metadata:
     service: frontend
     app: ecommerce
   name: frontend
+  # namespace: beacon
 spec:
   ports:
     - port: 80
