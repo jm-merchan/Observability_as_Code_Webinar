@@ -139,18 +139,19 @@ resource "kubernetes_manifest" "service_frontend" {
 
 resource "null_resource" "exampleA" {
   provisioner "local-exec" {
-    command = "aws eks --region ${var.aws_region}  update-kubeconfig  --name ${data.aws_eks_cluster.cluster.name}"
+    command = "aws eks --region ${var.aws_region}  update-kubeconfig  --name ${data.aws_eks_cluster.cluster.name} \ 
+    && kubectl get svc frontend -o json | jq .status.loadBalancer.ingress[0].hostname >> frontend.txt"
   }
   depends_on = [kubernetes_manifest.service_frontend]
 }
-
+/*
 resource "null_resource" "exampleB" {
   provisioner "local-exec" {
     command = "kubectl get svc frontend -o json | jq .status.loadBalancer.ingress[0].hostname >> frontend.txt"
   }
   depends_on = [kubernetes_manifest.service_frontend]
 }
-
+*/
 data "local_file" "frontend-fqdn" {
   filename = "${path.module}/frontend.txt"
   depends_on = [
