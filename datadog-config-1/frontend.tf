@@ -150,7 +150,7 @@ resource "null_resource" "exampleB" {
   depends_on = [kubernetes_manifest.service_frontend]
 }
 
-
+/*
 data "local_file" "frontend-fqdn" {
   filename = "frontend.txt"
   depends_on = [
@@ -161,3 +161,4 @@ data "local_file" "frontend-fqdn" {
 output "frontend-fqdn" {
   value = data.local_file.frontend-fqdn.content
 }
+*/
