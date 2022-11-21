@@ -151,7 +151,7 @@ resource "null_resource" "exampleB" {
 }
 
 data "local_file" "frontend-fqdn" {
-  filename = "frontend.txt"
+  filename = "./frontend.txt"
   depends_on = [
     null_resource.exampleA
   ]
