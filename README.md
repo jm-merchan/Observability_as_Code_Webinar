@@ -1,22 +1,53 @@
-# HashiTalks
+![1669111229568](image/README/1669111229568.png)# Observability as Code with Terraform and Datadog
 
-HashiTalks is a 24-hour virtual event produced by the HashiCorp Community Team and is hosted annually on the second-to-last Thursday in February. The first HashiTalks was in 2019, and the program continues to grow year-over-year. In 2020 we were able to connect with an audience of over 10,000. The CFP is open to the community for submissions on how they utilize HashiCorp tools, both for open-source (OSS) and enterprise (ENT) versions, in their workflows.
+The code contained in this repository is based upon a a couple of Terraform tutorial and the repository of a previous "Observability as Code Webminar". You can find the links for those tutorials and repository below:
 
-Confirmed Talks are 30 minutes long, recorded, and available on YouTube and HashiCorp's Resources Library soon after the virtual event and shared throughout the year. HashiTalks speakers are encouraged to submit to the CFP for our in-person conferences: HashiConf and HashiDays. We host speaker enablement sessions and invite all CFP submissions to join and learn from industry leader, Wesley Reisz, on best practices and common "gotchas" in presenting digitally. 
+* [Provision an EKS Cluster (AWS)](https://developer.hashicorp.com/terraform/tutorials/kubernetes/eks)
+* [Automate Monitoring with the Terraform Datadog Provider](https://developer.hashicorp.com/terraform/tutorials/applications/datadog-provider)
+* [hashicorp/observability-as-code
+  ](https://github.com/hashicorp/observability-as-code)
+* [DataDog/ecommerce-workshop](https://github.com/DataDog/ecommerce-workshop/tree/main/deploy/generic-k8s/ecommerce-app)
 
-See the project tab for a breakout of all steps and more details in planning HashiTalks. 
-Where able, the project plan is event-agnostic, but as this is modeled after HashiTalks, some details are HashiCorp specific and are encouraged to be applied elsewhere.
+# Prerequesites
 
-For HashiTalks, we utilized Zoom Webinar and crossposted to YouTube Live. We are evaluating new platforms for HashiTalks 2021. 
+To run this code you will need the following:
 
-Throughout the year, we will be hosting many smaller Regional HashiTalks that will be 8 hours long. 
+1. An AWS account to install a Kubernetes cluster (EKS)
+2. A Datadog account. [Free trial](https://www.datadoghq.com/lpg/?utm_source=advertisement&utm_medium=search&utm_campaign=dg-google-brand-ww&utm_keyword=%2Bdatadog&utm_matchtype=b&utm_campaignid=9551169254&utm_adgroupid=95325237782&gclid=Cj0KCQiAg_KbBhDLARIsANx7wAw1QQwVsFWOM1np3sh340vv56wKzymC8Y75ZQaWFB2RNge2CO42y-gaAnQ7EALw_wcB) will work
+3. A TFC account. Free tier will work, but we suggest you use the [free trial](https://www.hashicorp.com/blog/announcing-free-trials-for-hashicorp-terraform-cloud-paid-offerings) to check all options dicussed here.
+4. Terraform 1.3.X.
+   You can run this code locally simply by adding the variables to a tfvars file on your local environment
+5. If you are using TFC. We need to connect your Github account to TFC as VCS provider. Details on how to do that are available in this Tutorial: [Configure GitHub.com Access through OAuth](https://developer.hashicorp.com/terraform/tutorials/cloud/github-oauth?in=terraform%2Fcloud)
+6. Fork this repository
 
-Want to learn more about HashiTalks? Check out this community forum thread: https://discuss.hashicorp.com/t/hashitalks-frequently-asked-questions/4699
+# Content
 
-If you have any questions or comments, please get in touch with us here: hugs@hashicorp.com.
+Each folder contains a few different configurations.
 
-Join your local HashiCorp User Group chapter here: www.meetup.com/pro/hugs
+* **eks-cluster/**: Terraform configuration to define a three node cluster in EKS.
+* **datadog-config-1/**: Terraform configuration to:
+  * Deploy Datadog Agent on EKS cluster
+  * Deploy eCommerce application based on Terraform Kubernetes provider (`kubernetes_manifest` resource)
+  * Deploy A simple k8s deployment with a Load Balancer.
+  * Create a dashboard, define some monitors and syntetic test in Datadog.
+* **datadog-config-2/**: Terraform configuration to created dashboard, install monitors and apm in Datadog.
+* **eCommerce_app/**: Kubernetes yaml manifest for Datadog eCommerce app. The yaml manifest have been converted into HCL by means of [tfk8s tool](https://github.com/jrhouston/tfk8s).
 
------
+# Setup
 
-For those unfamiliar with navigating GitHub, here is the project board: https://github.com/hashicorp/hashitalks/projects/2
+We are going to create a workspace for the three folders where we have the Terraform code. The steps are the followings:
+
+1. Log on your TFC account and create a WorkSpace by selecting the Workspace menu on the left and the the "New workspace" button on the upper-right corner
+![workspace](/image/README/1669109692716.png)
+2. Create a "Version control workflow". This assume you have already defined **Github.com** as VCS provider for your TFC organization.
+   * Select your VCS.
+   * Then select the forked repository.
+   * Change the Workspace Name to the name of the folder (i.e: eks-cluster) and the click on the "Advanced options" drop-down menu:
+     * In the Terraform Working Directory set the directory name (i.e: eks-cluster).
+     * Apply Method: Auto apply
+     * Automatic Run Triggering: Only trigger runs when files in specified paths change (Select Syntax: Prefixes)
+   * Click on "Create workspace" button.
+
+![Creating a workspace](/image/README/1669111229568.png)
+
+Repeate the steps for the two directories remaining.
