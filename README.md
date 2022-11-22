@@ -23,7 +23,7 @@ To run this code you will need the following:
 Each folder contains a few different configurations.
 
 * **eks-cluster/**: Terraform configuration to define a three node cluster in EKS.
-* **datadog-config-1/**: Terraform configuration to:
+* **datadog/**: Terraform configuration to:
 
   * Deploy Datadog Agent on EKS cluster
   * Deploy eCommerce application with Terraform.
@@ -50,11 +50,11 @@ We are going to create a workspace for the three folders where we have the Terra
 
 ![Creating a workspace](/image/README/1669111229568.png)
 
-Repeate the steps for datadog-config-1.
+Repeate the steps for datadog directory.
 
-The code in the **datadog-config-1** makes use of a **remote-state-backend** to read the state of the **eks-cluster** workspace. For that reason we need to provide access to datadog-config-1 workspace to eks-cluster workspace. To do so, select the eks-cluster workspace and then select Settings on the left panel, which will take you to the General Setings page. Look for **Remote state sharing** and select the "Share with specific workspaces" radio button, and then in the space below select the datadog-config-1 workspace.
+The code in the **datadog workspace** makes use of a **remote-state-backend** to read the state of the **eks-cluster** workspace. For that reason we need to provide access to datadog workspace to eks-cluster workspace. To do so, select the eks-cluster workspace and then select Settings on the left panel, which will take you to the General Setings page. Look for **Remote state sharing** and select the "Share with specific workspaces" radio button, and then in the space below select the datadog workspace.
 
-![1669111833893](image/README/1669111833893.png)
+![1669137739219](image/README/1669137739219.png)
 
 ## Variables.
 
@@ -68,7 +68,7 @@ The following variables must be set per Workspace:
 * AWS_SECRET_ACCESS_KEY (env): AWS secret key (set as sensitive)
 * [Optional] AWS_SESSION_TOKEN (env): AWS session token (set as sensitive)
 
-### datadog-config-1
+### datadog
 
 * region (terraform): the AWS region (ie: us-east-1). Use the same as **eks-cluster** workspace.
 * application_anme (terraform): name for the simple K8s deployment.
@@ -86,10 +86,18 @@ The following variables must be set per Workspace:
 
 ## Bonus
 
-If you want you can automate the execution of the workspaces datadog-config-1  by means of Run Triggers. To that end you need to be using TFCB. To that end select any of these workspaces and go to Settings > Run Triggers and select eks-cluster as "Source Workspaces".
+If you want you can automate the execution of the workspaces datadog by means of Run Triggers. To that end you need to be using TFCB. To that end select any of these workspaces and go to Settings > Run Triggers and select eks-cluster as "Source Workspaces".
 
-![1669113261161](image/README/1669113261161.png)
+![1669137808944](image/README/1669137808944.png)
 
 # Implementation.
 
-Once you have completed the set up, start by creating a **run** (Plan + Apply) of **eks-cluster workspace**. Once completed you should generate another **run** for **datadog-config-1**  (not needed if using Run Triggers).
+Once you have completed the set up, start by creating a **run** (Plan + Apply) of **eks-cluster workspace**. Once completed you should generate another **run** for **datadog**  (not needed if using Run Triggers).
+
+# Clean-up
+
+Start by destroying the **datadog** workspace and once completed follow with the **eks-cluster** workspace.
+
+To delete the state, select the Workspace, on the left click on Settings > Destruction and Deletion. On the new page click on "Queue destroy plan"
+
+![1669138057252](image/README/1669138057252.png)
