@@ -1,8 +1,8 @@
 locals {
   services = {
     store-frontend = {
-      pd_service_key            = "54321098765432109876"
-      environment               = "ruby-shop"
+      #pd_service_key            = "54321098765432109876"
+      environment               = "demo"
       framework                 = "rack"
       high_error_rate_critical  = 10
       high_error_rate_warning   = 8
@@ -12,8 +12,8 @@ locals {
       high_p90_latency_warning  = 4
     }
     advertisements-service = {
-      pd_service_key            = "54321098765432109877"
-      environment               = "ruby-shop"
+      #pd_service_key            = "54321098765432109877"
+      environment               = "demo"
       framework                 = "flask"
       high_error_rate_critical  = 10
       high_error_rate_warning   = 8
@@ -23,8 +23,8 @@ locals {
       high_p90_latency_warning  = 4
     }
     discounts-service = {
-      pd_service_key            = "54321098765432109878"
-      environment               = "ruby-shop"
+      #pd_service_key            = "54321098765432109878"
+      environment               = "demo"
       framework                 = "flask"
       high_error_rate_critical  = 10
       high_error_rate_warning   = 8

@@ -25,11 +25,11 @@ Each folder contains a few different configurations.
 * **eks-cluster/**: Terraform configuration to define a three node cluster in EKS.
 * **datadog-config-1/**: Terraform configuration to:
   * Deploy Datadog Agent on EKS cluster
-  * Deploy eCommerce application based on Terraform Kubernetes provider (`kubernetes_manifest` resource)
-  * Deploy A simple k8s deployment with a Load Balancer.
-  * Create a dashboard, define some monitors and syntetic test in Datadog.
-* **datadog-config-2/**: Terraform configuration to created dashboard, install monitors and apm in Datadog.
-* **eCommerce_app/**: Kubernetes yaml manifest for Datadog eCommerce app. The yaml manifest have been converted into HCL by means of [tfk8s tool](https://github.com/jrhouston/tfk8s).
+  * Deploy eCommerce application with Terraform.
+  * Deploy a simple k8s deployment with a Load Balancer.
+  * Create a dashboard, define some monitors and some synthetic tests within Datadog.
+* **datadog-config-2/**: Terraform configuration to created dashboard, install monitors within Datadog.
+* **eCommerce_app/**: Kubernetes yaml manifest for Datadog eCommerce app. The yaml manifest have been converted into HCL by means of [tfk8s tool](https://github.com/jrhouston/tfk8s). Once we have migrated the manifest from yaml to HCL we have gone an step further with the frontend deployment and asociated service to use` kubernetes_deployment` and `kubernetes_service` resources.
 
 # Setup
 
@@ -98,4 +98,4 @@ If you want you can automate the execution of the workspaces datadog-config-1 an
 
 # Implementation.
 
-Once you have completed the set up, start by creating a **run** (Plan + Apply) of eks-cluster workspace. Once completed you should generate another **run** for both datadog-config-1 and datadog-config-2 (not needed if using Run Triggers).
+Once you have completed the set up, start by creating a **run** (Plan + Apply) of **eks-cluster workspace**. Once completed you should generate another **run** for both **datadog-config-1** and **datadog-config-2** (not needed if using Run Triggers).
