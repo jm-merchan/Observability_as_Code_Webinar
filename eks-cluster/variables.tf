@@ -5,7 +5,7 @@ variable "region" {
 }
 
 variable "vpc_name" {
-  type    = string
+  type = string
   #default = "datadog-webminar"
 
 }
