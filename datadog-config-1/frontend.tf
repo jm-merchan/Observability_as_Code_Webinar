@@ -108,7 +108,7 @@ resource "kubernetes_service" "frontend" {
   metadata {
     name      = "frontend"
     namespace = "default"
-    labels {
+    labels = {
       app     = "ecommerce"
       service = "frontend"
     }
