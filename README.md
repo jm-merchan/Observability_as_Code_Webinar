@@ -6,7 +6,7 @@
   ](https://github.com/hashicorp/observability-as-code)
 * [DataDog/ecommerce-workshop](https://github.com/DataDog/ecommerce-workshop/tree/main/deploy/generic-k8s/ecommerce-app)
 
-# Prerequesites
+# Prerequisites
 
 To run this code you will need the following:
 
