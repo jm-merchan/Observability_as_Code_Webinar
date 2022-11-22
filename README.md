@@ -24,12 +24,12 @@ Each folder contains a few different configurations.
 
 * **eks-cluster/**: Terraform configuration to define a three node cluster in EKS.
 * **datadog-config-1/**: Terraform configuration to:
+
   * Deploy Datadog Agent on EKS cluster
   * Deploy eCommerce application with Terraform.
   * Deploy a simple k8s deployment with a Load Balancer.
   * Create a dashboard, define some monitors and some synthetic tests within Datadog.
-* **datadog-config-2/**: Terraform configuration to created dashboard, install monitors within Datadog.
-* **eCommerce_app/**: Kubernetes yaml manifest for Datadog eCommerce app. The yaml manifest have been converted into HCL by means of [tfk8s tool](https://github.com/jrhouston/tfk8s). Once we have migrated the manifest from yaml to HCL we have gone an step further with the frontend deployment and asociated service to use` kubernetes_deployment` and `kubernetes_service` resources.
+* **eCommerce_app/**: Kubernetes yaml manifest for Datadog eCommerce app. The yaml manifest have been converted into HCL by means of [tfk8s tool](https://github.com/jrhouston/tfk8s). Once we have migrated the manifest from yaml to HCL we have gone an step further with the frontend deployment and asociated service to use ` kubernetes_deployment` and `kubernetes_service` resources.
 
 # Setup
 
@@ -50,7 +50,7 @@ We are going to create a workspace for the three folders where we have the Terra
 
 ![Creating a workspace](/image/README/1669111229568.png)
 
-Repeate the steps for the two directories remaining.
+Repeate the steps for datadog-config-1.
 
 The code in the **datadog-config-1** makes use of a **remote-state-backend** to read the state of the **eks-cluster** workspace. For that reason we need to provide access to datadog-config-1 workspace to eks-cluster workspace. To do so, select the eks-cluster workspace and then select Settings on the left panel, which will take you to the General Setings page. Look for **Remote state sharing** and select the "Share with specific workspaces" radio button, and then in the space below select the datadog-config-1 workspace.
 
@@ -79,23 +79,17 @@ The following variables must be set per Workspace:
 * datadog_api_key (terraform): Datadog API Key (set as sensitive)
 * datadog_app_key (terraform): Datadog API Key (set as sensitive)
 
-### datadog-config-2
-
-* application (terraform): name for the application (ie: eCommerce)
-* datadog_api_key (terraform): Datadog API Key (set as sensitive)
-* datadog_app_key (terraform): Datadog API Key (set as sensitive)
-
 > Variable shared among workspaces can be defined as "Variable sets" and then associated to specific workspaces. This has two benefits:
->
+
 > * We can split the scope of what different persons within the organization can do (ie: we can create a role to define the datadog keys, who can associate those sensitive variables to a workspace; this way the platform team creating the Terraform code does not have to see those keys).
 > * And follow DRY principle.
 
 ## Bonus
 
-If you want you can automate the execution of the workspaces datadog-config-1 and datadog-config-2 by means of Run Triggers. To that end you need to be using TFCB. To that end select any of these workspaces and go to Settings > Run Triggers and select eks-cluster as "Source Workspaces".
+If you want you can automate the execution of the workspaces datadog-config-1  by means of Run Triggers. To that end you need to be using TFCB. To that end select any of these workspaces and go to Settings > Run Triggers and select eks-cluster as "Source Workspaces".
 
 ![1669113261161](image/README/1669113261161.png)
 
 # Implementation.
 
-Once you have completed the set up, start by creating a **run** (Plan + Apply) of **eks-cluster workspace**. Once completed you should generate another **run** for both **datadog-config-1** and **datadog-config-2** (not needed if using Run Triggers).
+Once you have completed the set up, start by creating a **run** (Plan + Apply) of **eks-cluster workspace**. Once completed you should generate another **run** for **datadog-config-1**  (not needed if using Run Triggers).
