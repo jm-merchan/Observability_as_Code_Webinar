@@ -32,7 +32,7 @@ resource "datadog_synthetics_test" "eCommerce" {
 
   request_definition {
     method = "GET"
-    url    = "http://${kubernetes_service.deploy_frontend.status.0.load_balancer.0.ingress.0.hostname}"
+    url    = "http://${kubernetes_service.frontend.status.0.load_balancer.0.ingress.0.hostname}"
   }
 
   assertion {

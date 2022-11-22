@@ -18,8 +18,9 @@ locals {
   # cluster_name = "datadog-webminar-${random_string.suffix.result}"
   cluster_name = "datadog-webminar"
 }
-
+/*
 resource "random_string" "suffix" {
   length  = 8
   special = false
 }
+*/
