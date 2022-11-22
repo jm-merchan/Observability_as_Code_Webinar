@@ -80,5 +80,25 @@ resource "helm_release" "datadog_agent" {
     name  = "datadog.cluster_name"
     value = "ecommerce"
   }
+  set {
+    name = "datadog.apm.portEnabled"
+    value = true
+  }
+  
+  set {
+    name = "datadog.processAgent.enabled"
+    value = true
+  }
+
+  set {
+    name = "datadog.networkMonitoring.enabled"
+    value = true
+  }
+
+  set {
+    name = "datadog.kubelet.tlsVerify"
+    value = false
+  }
+
 }
 
