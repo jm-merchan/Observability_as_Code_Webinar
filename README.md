@@ -1,4 +1,4 @@
-![1669111229568](image/README/1669111229568.png)# Observability as Code with Terraform and Datadog
+# Observability as Code with Terraform and Datadog
 
 The code contained in this repository is based upon a a couple of Terraform tutorial and the repository of a previous "Observability as Code Webminar". You can find the links for those tutorials and repository below:
 
