@@ -53,3 +53,33 @@ resource "datadog_synthetics_test" "eCommerce" {
 
   status = "live"
 }
+
+resource "datadog_synthetics_test" "eCommerce_browser" {
+  type    = "browser"
+  subtype = "http"
+
+  request_definition {
+    method = "GET"
+    url    = "http://${kubernetes_service.frontend.status.0.load_balancer.0.ingress.0.hostname}"
+  }
+
+  assertion {
+    type     = "statusCode"
+    operator = "is"
+    target   = "200"
+  }
+
+  device_ids = ["laptop_large"]
+
+  locations = ["aws:${var.aws_region}"]
+  options_list {
+    tick_every          = 1200
+    min_location_failed = 1
+  }
+
+  name    = "Checking eCommerce app via browser"
+  message = "eCommerce Application is not responding"
+  tags    = ["app:ecommerce", "tags.datadoghq.com/env:development"]
+
+  status = "live"
+}
