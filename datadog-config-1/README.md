@@ -75,3 +75,7 @@ Finally, the helm chart values have been extended with the following values
     value = true
   }
 ```
+
+
+
+One of the dashboard created has been taken and refined from this repo [hashicorp/observability-as-code](https://github.com/hashicorp/observability-as-code)
