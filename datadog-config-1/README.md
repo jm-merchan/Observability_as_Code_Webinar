@@ -1,18 +1,46 @@
-# Deploying Datadog Agent
+# Deploying Datadog Agent, Monitors, Dashboard, ...
 
-This repo is based on [Automate Monitoring with the Terraform Datadog Provider tutorial](https://developer.hashicorp.com/terraform/tutorials/applications/datadog-provider).
+This repo is based on [Automate Monitoring with the Terraform Datadog Provider tutorial](https://developer.hashicorp.com/terraform/tutorials/applications/datadog-provider), which has been extended to deploy the eCommerce application using HCL.
 
-There are a couple of diferences in relation to what you can find in that Tutorial:
+If you want to run this code locally update the kubernetes.tf file with the following
 
-1. We were hitting this issue: https://github.com/terraform-aws-modules/terraform-aws-eks/issues/1986 and so we implemented the suggested workaround: https://github.com/terraform-aws-modules/terraform-aws-eks/issues/1986#issuecomment-1112635625
-2. We need to declare the VPC name, AWS Region and define as enviromental variables the AWS credentials:
-   * AWS_ACCESS_KEY_ID
-   * AWS_SECRET_ACCESS_KEY
-   * AWS_SESSION_TOKEN [Optional]
+Instead of this
 
+```bash
+data "terraform_remote_state" "eks" {
+  backend = "remote"
 
+  config = {
+    organization = var.org_name
+    workspaces = {
+      name = "eks-cluster"
+    }
+  }
+}
+```
 
-# Integrating with Datadog
+Use this
 
+```bash
+data "terraform_remote_state" "eks" {
+  backend = "local"
+
+  config = {
+    path = "../eks-cluster/terraform.tfstate"
+  }
+}
+```
+
+and remove the org_name variable from the variables.tf
+
+You can define the rest of the variables using a **tfvars** file
 
 ---
+
+The files advertisements.tf, db.tf, discount.tf and frontend.tf are the result of running 
+
+```bash
+tfk8s -f input.yaml -o output.tf
+```
+
+on the different yaml manifest that comprised the eCommerce application, where input and output should be changed with the name portion of the manifest (advertisement, db, and so on). They have made available within the eCommerce_app folder and have been taken from the original repository [DataDog/ecommerce-workshop](https://github.com/DataDog/ecommerce-workshop/tree/main/deploy/generic-k8s/ecommerce-app)
