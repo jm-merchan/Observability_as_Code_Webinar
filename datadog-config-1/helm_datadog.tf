@@ -100,5 +100,10 @@ resource "helm_release" "datadog_agent" {
     value = false
   }
 
+  set {
+    name = "datadog.processAgent.processCollection"
+    value = true
+  }
+
 }
 
