@@ -29,7 +29,7 @@ resource "datadog_monitor" "ecommerce" {
   message            = "Kubernetes Pods are not in an optimal health state. Notify: @operator"
   escalation_message = "Please investigate the eCommerce App, @operator"
 
-  query = "max(last_1m):sum:kubernetes.containers.running{env:development} <= 1"
+  query = "max(last_1m):sum:kubernetes.containers.running{env:development}"
 
   monitor_thresholds {
     ok       = 4
