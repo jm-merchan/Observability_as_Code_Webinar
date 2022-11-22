@@ -1,9 +1,9 @@
 resource "kubernetes_manifest" "serviceaccount_postgres" {
   manifest = {
     "apiVersion" = "v1"
-    "kind" = "ServiceAccount"
+    "kind"       = "ServiceAccount"
     "metadata" = {
-      "name" = "postgres"
+      "name"      = "postgres"
       "namespace" = "default"
     }
   }
@@ -18,10 +18,10 @@ resource "kubernetes_manifest" "secret_db_password" {
     "kind" = "Secret"
     "metadata" = {
       "labels" = {
-        "app" = "ecommerce"
+        "app"     = "ecommerce"
         "service" = "db"
       }
-      "name" = "db-password"
+      "name"      = "db-password"
       "namespace" = "default"
     }
     "type" = "Opaque"
@@ -31,7 +31,7 @@ resource "kubernetes_manifest" "secret_db_password" {
 resource "kubernetes_manifest" "persistentvolume_task_pv_volume" {
   manifest = {
     "apiVersion" = "v1"
-    "kind" = "PersistentVolume"
+    "kind"       = "PersistentVolume"
     "metadata" = {
       "labels" = {
         "type" = "local"
@@ -49,7 +49,7 @@ resource "kubernetes_manifest" "persistentvolume_task_pv_volume" {
         "path" = "/mnt/data"
       }
       "persistentVolumeReclaimPolicy" = "Retain"
-      "storageClassName" = "manual"
+      "storageClassName"              = "manual"
     }
   }
 }
@@ -57,9 +57,9 @@ resource "kubernetes_manifest" "persistentvolume_task_pv_volume" {
 resource "kubernetes_manifest" "persistentvolumeclaim_task_pvc_volume" {
   manifest = {
     "apiVersion" = "v1"
-    "kind" = "PersistentVolumeClaim"
+    "kind"       = "PersistentVolumeClaim"
     "metadata" = {
-      "name" = "task-pvc-volume"
+      "name"      = "task-pvc-volume"
       "namespace" = "default"
     }
     "spec" = {
@@ -79,20 +79,20 @@ resource "kubernetes_manifest" "persistentvolumeclaim_task_pvc_volume" {
 resource "kubernetes_manifest" "deployment_db" {
   manifest = {
     "apiVersion" = "apps/v1"
-    "kind" = "Deployment"
+    "kind"       = "Deployment"
     "metadata" = {
       "labels" = {
-        "app" = "ecommerce"
+        "app"     = "ecommerce"
         "service" = "db"
       }
-      "name" = "db"
+      "name"      = "db"
       "namespace" = "default"
     }
     "spec" = {
       "replicas" = 1
       "selector" = {
         "matchLabels" = {
-          "app" = "ecommerce"
+          "app"     = "ecommerce"
           "service" = "db"
         }
       }
@@ -100,7 +100,7 @@ resource "kubernetes_manifest" "deployment_db" {
       "template" = {
         "metadata" = {
           "labels" = {
-            "app" = "ecommerce"
+            "app"     = "ecommerce"
             "service" = "db"
           }
         }
@@ -112,22 +112,22 @@ resource "kubernetes_manifest" "deployment_db" {
                   "name" = "POSTGRES_PASSWORD"
                   "valueFrom" = {
                     "secretKeyRef" = {
-                      "key" = "pw"
+                      "key"  = "pw"
                       "name" = "db-password"
                     }
                   }
                 },
                 {
-                  "name" = "POSTGRES_USER"
+                  "name"  = "POSTGRES_USER"
                   "value" = "user"
                 },
                 {
-                  "name" = "PGDATA"
+                  "name"  = "PGDATA"
                   "value" = "/var/lib/postgresql/data/mydata"
                 },
               ]
               "image" = "postgres:11-alpine"
-              "name" = "postgres"
+              "name"  = "postgres"
               "ports" = [
                 {
                   "containerPort" = 5432
@@ -140,7 +140,7 @@ resource "kubernetes_manifest" "deployment_db" {
               "volumeMounts" = [
                 {
                   "mountPath" = "/var/lib/postgresql/data"
-                  "name" = "postgresdb"
+                  "name"      = "postgresdb"
                 },
               ]
             },
@@ -163,26 +163,26 @@ resource "kubernetes_manifest" "deployment_db" {
 resource "kubernetes_manifest" "service_db" {
   manifest = {
     "apiVersion" = "v1"
-    "kind" = "Service"
+    "kind"       = "Service"
     "metadata" = {
       "creationTimestamp" = null
       "labels" = {
-        "app" = "ecommerce"
+        "app"     = "ecommerce"
         "service" = "db"
       }
-      "name" = "db"
+      "name"      = "db"
       "namespace" = "default"
     }
     "spec" = {
       "ports" = [
         {
-          "port" = 5432
-          "protocol" = "TCP"
+          "port"       = 5432
+          "protocol"   = "TCP"
           "targetPort" = 5432
         },
       ]
       "selector" = {
-        "app" = "ecommerce"
+        "app"     = "ecommerce"
         "service" = "db"
       }
     }

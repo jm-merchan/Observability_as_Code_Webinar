@@ -81,27 +81,27 @@ resource "helm_release" "datadog_agent" {
     value = "ecommerce"
   }
   set {
-    name = "datadog.apm.portEnabled"
-    value = true
-  }
-  
-  set {
-    name = "datadog.processAgent.enabled"
+    name  = "datadog.apm.portEnabled"
     value = true
   }
 
   set {
-    name = "datadog.networkMonitoring.enabled"
+    name  = "datadog.processAgent.enabled"
     value = true
   }
 
   set {
-    name = "datadog.kubelet.tlsVerify"
+    name  = "datadog.networkMonitoring.enabled"
+    value = true
+  }
+
+  set {
+    name  = "datadog.kubelet.tlsVerify"
     value = false
   }
 
   set {
-    name = "datadog.processAgent.processCollection"
+    name  = "datadog.processAgent.processCollection"
     value = true
   }
 
