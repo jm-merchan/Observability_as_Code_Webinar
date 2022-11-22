@@ -1,7 +1,5 @@
 # Observability as Code with Terraform and Datadog
 
-The code contained in this repository is based upon a a couple of Terraform tutorial and the repository of a previous "Observability as Code Webminar". You can find the links for those tutorials and repository below:
-
 * [Provision an EKS Cluster (AWS)](https://developer.hashicorp.com/terraform/tutorials/kubernetes/eks)
 * [Automate Monitoring with the Terraform Datadog Provider](https://developer.hashicorp.com/terraform/tutorials/applications/datadog-provider)
 * [hashicorp/observability-as-code
@@ -38,12 +36,14 @@ Each folder contains a few different configurations.
 We are going to create a workspace for the three folders where we have the Terraform code. The steps are the followings:
 
 1. Log on your TFC account and create a WorkSpace by selecting the Workspace menu on the left and the the "New workspace" button on the upper-right corner
+
 ![workspace](/image/README/1669109692716.png)
+
 2. Create a "Version control workflow". This assume you have already defined **Github.com** as VCS provider for your TFC organization.
    * Select your VCS.
    * Then select the forked repository.
    * Change the Workspace Name to the name of the folder (i.e: eks-cluster) and the click on the "Advanced options" drop-down menu:
-     * In the Terraform Working Directory set the directory name (i.e: eks-cluster).
+     * In the Terraform Working Directory set the directory name (i.e: **eks-cluster/**).
      * Apply Method: Auto apply
      * Automatic Run Triggering: Only trigger runs when files in specified paths change (Select Syntax: Prefixes)
    * Click on "Create workspace" button.
@@ -51,3 +51,51 @@ We are going to create a workspace for the three folders where we have the Terra
 ![Creating a workspace](/image/README/1669111229568.png)
 
 Repeate the steps for the two directories remaining.
+
+The code in the **datadog-config-1** makes use of a **remote-state-backend** to read the state of the **eks-cluster** workspace. For that reason we need to provide access to datadog-config-1 workspace to eks-cluster workspace. To do so, select the eks-cluster workspace and then select Settings on the left panel, which will take you to the General Setings page. Look for **Remote state sharing** and select the "Share with specific workspaces" radio button, and then in the space below select the datadog-config-1 workspace.
+
+![1669111833893](image/README/1669111833893.png)
+
+## Variables.
+
+The following variables must be set per Workspace:
+
+### eks-cluster
+
+* region (terraform): the AWS region (ie: us-east-1)
+* vpc_name (terraform): name for the vpc.
+* AWS_ACCESS_KEY_ID (env): AWS access key.
+* AWS_SECRET_ACCESS_KEY (env): AWS secret key (set as sensitive)
+* [Optional] AWS_SESSION_TOKEN (env): AWS session token (set as sensitive)
+
+### datadog-config-1
+
+* region (terraform): the AWS region (ie: us-east-1). Use the same as **eks-cluster** workspace.
+* application_anme (terraform): name for the simple K8s deployment.
+* org_name: name of your TFC organization, where the **eks-cluster** workspace has been deployed.
+* AWS_ACCESS_KEY_ID (env): AWS access key.
+* AWS_SECRET_ACCESS_KEY (env): AWS secret key (set as sensitive)
+* [Optional] AWS_SESSION_TOKEN (env): AWS session token (set as sensitive)
+* datadog_api_key (terraform): Datadog API Key (set as sensitive)
+* datadog_app_key (terraform): Datadog API Key (set as sensitive)
+
+### datadog-config-2
+
+* application (terraform): name for the application (ie: eCommerce)
+* datadog_api_key (terraform): Datadog API Key (set as sensitive)
+* datadog_app_key (terraform): Datadog API Key (set as sensitive)
+
+> Variable shared among workspaces can be defined as "Variable sets" and then associated to specific workspaces. This has two benefits:
+>
+> * We can split the scope of what different persons within the organization can do (ie: we can create a role to define the datadog keys, who can associate those sensitive variables to a workspace; this way the platform team creating the Terraform code does not have to see those keys).
+> * And follow DRY principle.
+
+## Bonus
+
+If you want you can automate the execution of the workspaces datadog-config-1 and datadog-config-2 by means of Run Triggers. To that end you need to be using TFCB. To that end select any of these workspaces and go to Settings > Run Triggers and select eks-cluster as "Source Workspaces".
+
+![1669113261161](image/README/1669113261161.png)
+
+# Implementation.
+
+Once you have completed the set up, start by creating a **run** (Plan + Apply) of eks-cluster workspace. Once completed you should generate another **run** for both datadog-config-1 and datadog-config-2 (not needed if using Run Triggers).
