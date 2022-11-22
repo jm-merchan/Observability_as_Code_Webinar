@@ -25,3 +25,31 @@ resource "datadog_synthetics_test" "beacon" {
 
   status = "live"
 }
+
+resource "datadog_synthetics_test" "eCommerce" {
+  type    = "api"
+  subtype = "http"
+
+  request_definition {
+    method = "GET"
+    url    = "http://${kubernetes_service.deploy_frontend.status.0.load_balancer.0.ingress.0.hostname}"
+  }
+
+  assertion {
+    type     = "statusCode"
+    operator = "is"
+    target   = "200"
+  }
+
+  locations = ["aws:${var.aws_region}"]
+  options_list {
+    tick_every          = 60
+    min_location_failed = 1
+  }
+
+  name    = "Checking eCommerce app via API"
+  message = "eCommerce Application is not responding to GET requests"
+  tags    = ["app:ecommerce", "tags.datadoghq.com/env:development"]
+
+  status = "live"
+}
