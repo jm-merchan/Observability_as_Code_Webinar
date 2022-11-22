@@ -108,6 +108,10 @@ resource "kubernetes_service" "frontend" {
   metadata {
     name      = "frontend"
     namespace = "default"
+    labels {
+      app     = "ecommerce"
+      service = "frontend"
+    }
   }
   spec {
     selector = {
@@ -120,6 +124,7 @@ resource "kubernetes_service" "frontend" {
     type = "LoadBalancer"
   }
 }
+
 
 
 output "frontend" {
