@@ -51,10 +51,10 @@ spec:
         - name: DD_ANALYTICS_ENABLED
           value: "true"
         # Enable RUM
-        # - name: DD_CLIENT_TOKEN
-        #   value: <your_client_token>
-        # - name: DD_APPLICATION_ID
-        #   value: <your_application_id>
+        - name: DD_CLIENT_TOKEN
+          value: pub8ae382736b48e25651ac5be4bc2c68a9
+        - name: DD_APPLICATION_ID
+          value: 1eb42064-7b86-4712-94e3-9c8fd5bd8f96
         image: ddtraining/storefront:latest
         imagePullPolicy: Always
         name: ecommerce-spree-observability
