@@ -1,11 +1,11 @@
 resource "kubernetes_manifest" "deployment_discounts" {
   manifest = {
     "apiVersion" = "apps/v1"
-    "kind" = "Deployment"
+    "kind"       = "Deployment"
     "metadata" = {
       "labels" = {
-        "app" = "ecommerce"
-        "service" = "discounts"
+        "app"                    = "ecommerce"
+        "service"                = "discounts"
         "tags.datadoghq.com/env" = "development"
       }
       "name" = "discounts"
@@ -14,7 +14,7 @@ resource "kubernetes_manifest" "deployment_discounts" {
       "replicas" = 1
       "selector" = {
         "matchLabels" = {
-          "app" = "ecommerce"
+          "app"     = "ecommerce"
           "service" = "discounts"
         }
       }
@@ -23,8 +23,8 @@ resource "kubernetes_manifest" "deployment_discounts" {
         "metadata" = {
           "creationTimestamp" = null
           "labels" = {
-            "app" = "ecommerce"
-            "service" = "discounts"
+            "app"                    = "ecommerce"
+            "service"                = "discounts"
             "tags.datadoghq.com/env" = "development"
           }
         }
@@ -42,32 +42,32 @@ resource "kubernetes_manifest" "deployment_discounts" {
               ]
               "env" = [
                 {
-                  "name" = "FLASK_APP"
+                  "name"  = "FLASK_APP"
                   "value" = "discounts.py"
                 },
                 {
-                  "name" = "FLASK_DEBUG"
+                  "name"  = "FLASK_DEBUG"
                   "value" = "1"
                 },
                 {
                   "name" = "POSTGRES_PASSWORD"
                   "valueFrom" = {
                     "secretKeyRef" = {
-                      "key" = "pw"
+                      "key"  = "pw"
                       "name" = "db-password"
                     }
                   }
                 },
                 {
-                  "name" = "POSTGRES_USER"
+                  "name"  = "POSTGRES_USER"
                   "value" = "user"
                 },
                 {
-                  "name" = "POSTGRES_HOST"
+                  "name"  = "POSTGRES_HOST"
                   "value" = "db"
                 },
                 {
-                  "name" = "DATADOG_SERVICE_NAME"
+                  "name"  = "DATADOG_SERVICE_NAME"
                   "value" = "discountsservice"
                 },
                 {
@@ -79,15 +79,15 @@ resource "kubernetes_manifest" "deployment_discounts" {
                   }
                 },
                 {
-                  "name" = "DD_LOGS_INJECTION"
+                  "name"  = "DD_LOGS_INJECTION"
                   "value" = "true"
                 },
                 {
-                  "name" = "DD_ANALYTICS_ENABLED"
+                  "name"  = "DD_ANALYTICS_ENABLED"
                   "value" = "true"
                 },
                 {
-                  "name" = "DD_PROFILING_ENABLED"
+                  "name"  = "DD_PROFILING_ENABLED"
                   "value" = "true"
                 },
                 {
@@ -100,7 +100,7 @@ resource "kubernetes_manifest" "deployment_discounts" {
                 },
               ]
               "image" = "ddtraining/discounts:latest"
-              "name" = "discounts"
+              "name"  = "discounts"
               "ports" = [
                 {
                   "containerPort" = 5001
@@ -118,10 +118,10 @@ resource "kubernetes_manifest" "deployment_discounts" {
 resource "kubernetes_manifest" "service_discounts" {
   manifest = {
     "apiVersion" = "v1"
-    "kind" = "Service"
+    "kind"       = "Service"
     "metadata" = {
       "labels" = {
-        "app" = "ecommerce"
+        "app"     = "ecommerce"
         "service" = "discounts"
       }
       "name" = "discounts"
@@ -129,17 +129,17 @@ resource "kubernetes_manifest" "service_discounts" {
     "spec" = {
       "ports" = [
         {
-          "port" = 5001
-          "protocol" = "TCP"
+          "port"       = 5001
+          "protocol"   = "TCP"
           "targetPort" = 5001
         },
       ]
       "selector" = {
-        "app" = "ecommerce"
+        "app"     = "ecommerce"
         "service" = "discounts"
       }
       "sessionAffinity" = "None"
-      "type" = "ClusterIP"
+      "type"            = "ClusterIP"
     }
   }
 }

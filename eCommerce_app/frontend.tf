@@ -1,11 +1,11 @@
 resource "kubernetes_manifest" "deployment_frontend" {
   manifest = {
     "apiVersion" = "apps/v1"
-    "kind" = "Deployment"
+    "kind"       = "Deployment"
     "metadata" = {
       "labels" = {
-        "app" = "ecommerce"
-        "service" = "frontend"
+        "app"                    = "ecommerce"
+        "service"                = "frontend"
         "tags.datadoghq.com/env" = "development"
       }
       "name" = "frontend"
@@ -14,13 +14,13 @@ resource "kubernetes_manifest" "deployment_frontend" {
       "replicas" = 1
       "selector" = {
         "matchLabels" = {
-          "app" = "ecommerce"
+          "app"     = "ecommerce"
           "service" = "frontend"
         }
       }
       "strategy" = {
         "rollingUpdate" = {
-          "maxSurge" = "25%"
+          "maxSurge"       = "25%"
           "maxUnavailable" = "25%"
         }
         "type" = "RollingUpdate"
@@ -28,8 +28,8 @@ resource "kubernetes_manifest" "deployment_frontend" {
       "template" = {
         "metadata" = {
           "labels" = {
-            "app" = "ecommerce"
-            "service" = "frontend"
+            "app"                    = "ecommerce"
+            "service"                = "frontend"
             "tags.datadoghq.com/env" = "development"
           }
         }
@@ -44,14 +44,14 @@ resource "kubernetes_manifest" "deployment_frontend" {
               ]
               "env" = [
                 {
-                  "name" = "DB_USERNAME"
+                  "name"  = "DB_USERNAME"
                   "value" = "user"
                 },
                 {
                   "name" = "DB_PASSWORD"
                   "valueFrom" = {
                     "secretKeyRef" = {
-                      "key" = "pw"
+                      "key"  = "pw"
                       "name" = "db-password"
                     }
                   }
@@ -65,7 +65,7 @@ resource "kubernetes_manifest" "deployment_frontend" {
                   }
                 },
                 {
-                  "name" = "DD_LOGS_INJECTION"
+                  "name"  = "DD_LOGS_INJECTION"
                   "value" = "true"
                 },
                 {
@@ -77,23 +77,23 @@ resource "kubernetes_manifest" "deployment_frontend" {
                   }
                 },
                 {
-                  "name" = "DD_ANALYTICS_ENABLED"
+                  "name"  = "DD_ANALYTICS_ENABLED"
                   "value" = "true"
                 },
               ]
-              "image" = "ddtraining/storefront:latest"
+              "image"           = "ddtraining/storefront:latest"
               "imagePullPolicy" = "Always"
-              "name" = "ecommerce-spree-observability"
+              "name"            = "ecommerce-spree-observability"
               "ports" = [
                 {
                   "containerPort" = 3000
-                  "protocol" = "TCP"
+                  "protocol"      = "TCP"
                 },
               ]
               "resources" = {
                 "limits" = {}
                 "requests" = {
-                  "cpu" = "100m"
+                  "cpu"    = "100m"
                   "memory" = "100Mi"
                 }
               }
@@ -108,10 +108,10 @@ resource "kubernetes_manifest" "deployment_frontend" {
 resource "kubernetes_manifest" "service_frontend" {
   manifest = {
     "apiVersion" = "v1"
-    "kind" = "Service"
+    "kind"       = "Service"
     "metadata" = {
       "labels" = {
-        "app" = "ecommerce"
+        "app"     = "ecommerce"
         "service" = "frontend"
       }
       "name" = "frontend"
@@ -119,14 +119,14 @@ resource "kubernetes_manifest" "service_frontend" {
     "spec" = {
       "ports" = [
         {
-          "name" = "http"
-          "port" = 80
-          "protocol" = "TCP"
+          "name"       = "http"
+          "port"       = 80
+          "protocol"   = "TCP"
           "targetPort" = 3000
         },
       ]
       "selector" = {
-        "app" = "ecommerce"
+        "app"     = "ecommerce"
         "service" = "frontend"
       }
       "type" = "LoadBalancer"

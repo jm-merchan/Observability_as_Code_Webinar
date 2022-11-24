@@ -81,7 +81,6 @@ resource "kubernetes_deployment" "deploy_frontend" {
           }
 
 
-
           image             = "ddtraining/storefront:latest"
           image_pull_policy = "Always"
           name              = "ecommerce-spree-observability"
