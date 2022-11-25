@@ -80,6 +80,16 @@ resource "kubernetes_deployment" "deploy_frontend" {
             value = true
           }
 
+          env {
+            name  = "DD_CLIENT_TOKEN"
+            value = var.DD_CLIENT_TOKEN
+          }
+
+          env {
+            name  = "DD_APPLICATION_ID"
+            value = var.DD_APPLICATION_ID
+          }
+
 
           image             = "ddtraining/storefront:latest"
           image_pull_policy = "Always"

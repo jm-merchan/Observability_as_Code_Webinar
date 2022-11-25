@@ -54,7 +54,7 @@ resource "datadog_synthetics_test" "tfer--synthetics_ahg-4qy-te5" {
   }
 
   device_ids = ["chrome.laptop_large"]
-  locations  = ["aws:us-east-1"]
+  locations  = ["aws:${var.aws_region}"]
   message    = "eCommerce Application is not responding @jaime.alonso@datadoghq.com"
   name       = "Checkout test"
 
@@ -74,7 +74,7 @@ resource "datadog_synthetics_test" "tfer--synthetics_ahg-4qy-te5" {
       renotify_interval = "0"
     }
 
-    monitor_priority = "0"
+    monitor_priority = "1"
     no_screenshot    = "false"
 
     retry {
@@ -83,8 +83,8 @@ resource "datadog_synthetics_test" "tfer--synthetics_ahg-4qy-te5" {
     }
 
     rum_settings {
-      application_id  = "1eb42064-7b86-4712-94e3-9c8fd5bd8f96"
-      client_token_id = "119092"
+      application_id  = var.DD_APPLICATION_ID
+      client_token_id = var.client_token_id
       is_enabled      = "true"
     }
 
@@ -99,7 +99,7 @@ resource "datadog_synthetics_test" "tfer--synthetics_ahg-4qy-te5" {
     port                    = "0"
     should_track_hops       = "false"
     timeout                 = "0"
-    url                     = "http://a087d5e0fb2d2474889afeb586e2ba1d-853447894.us-east-1.elb.amazonaws.com"
+    url                     = "http://${kubernetes_service.frontend.status.0.load_balancer.0.ingress.0.hostname}"
   }
 
   status = "live"
