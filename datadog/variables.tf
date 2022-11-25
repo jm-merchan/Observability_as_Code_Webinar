@@ -32,6 +32,6 @@ variable "DD_APPLICATION_ID" {
 }
 
 variable "client_token_id" {
-  type    = string
+  type = string
 }
 

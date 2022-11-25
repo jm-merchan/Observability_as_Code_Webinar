@@ -22,7 +22,7 @@ resource "datadog_monitor" "beacon" {
   tags = ["app:beacon", "env:demo"]
 }
 
-
+/*
 resource "datadog_monitor" "ecommerce" {
   name               = "Checking ecommerce pods"
   type               = "metric alert"
@@ -41,6 +41,7 @@ resource "datadog_monitor" "ecommerce" {
 
   tags = ["app:ecommerce", "tags.datadoghq.com/env:development"]
 }
+*/
 
 
 
