@@ -27,17 +27,5 @@ data "terraform_remote_state" "k8s" {
   }
 }
 
-# Retrieve EKS cluster configuration
-data "kubernetes_service" "frontend" {
-  metadata {
-    name      = "frontend"
-    namespace = "default"
-  }
-}
 
-data "kubernetes_service" "beacon" {
-  metadata {
-    name      = "datadog"
-    namespace = "datadog"
-  }
-}
+
