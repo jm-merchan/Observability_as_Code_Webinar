@@ -89,6 +89,10 @@ The following variables must be set per Workspace:
 * DD_CLIENT_TOKEN: RUM client Token
 * DD_APPLICATION_ID: RUM application Token
 
+> Example showing how to instrument application for RUM functionality
+
+![1669647494863](image/README/1669647494863.png)
+
 ### Datadog
 
 * aws_region (terraform): the AWS region (ie: us-east-1). Use the same as **eks-cluster** workspace.
