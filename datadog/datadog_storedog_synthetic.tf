@@ -103,6 +103,6 @@ resource "datadog_synthetics_test" "tfer--synthetics_ahg-4qy-te5" {
   }
 
   status = "live"
-  tags   = ["app:ecommerce", "tags.datadoghq.com/env:development"]
+  tags   = ["app:ecommerce", "tags.datadoghq.com/env:development", "service: store-frontend"]
   type   = "browser"
 }
