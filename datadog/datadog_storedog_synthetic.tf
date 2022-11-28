@@ -84,7 +84,7 @@ resource "datadog_synthetics_test" "tfer--synthetics_ahg-4qy-te5" {
 
     rum_settings {
       application_id  = var.DD_APPLICATION_ID
-      client_token_id = var.DD_CLIENT_TOKEN
+      client_token_id = var.DD_CLIENT_ID
       is_enabled      = "true"
     }
 

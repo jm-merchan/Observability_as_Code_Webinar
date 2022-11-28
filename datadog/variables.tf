@@ -29,3 +29,7 @@ variable "DD_APPLICATION_ID" {
   type = string
 }
 
+variable "DD_CLIENT_ID" {
+  type = string
+}
+
