@@ -23,3 +23,15 @@ variable "org_name" {
 }
 
 
+variable "DD_CLIENT_TOKEN" {
+  type = string
+}
+
+variable "DD_APPLICATION_ID" {
+  type = string
+}
+
+variable "client_token_id" {
+  type = string
+}
+
