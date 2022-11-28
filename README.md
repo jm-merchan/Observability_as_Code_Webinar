@@ -1,12 +1,14 @@
 # Observability as Code with Terraform and Datadog
 
+## Related tutorials and repositories
+
 * [Provision an EKS Cluster (AWS)](https://developer.hashicorp.com/terraform/tutorials/kubernetes/eks)
 * [Automate Monitoring with the Terraform Datadog Provider](https://developer.hashicorp.com/terraform/tutorials/applications/datadog-provider)
 * [hashicorp/observability-as-code
   ](https://github.com/hashicorp/observability-as-code)
 * [DataDog/ecommerce-workshop](https://github.com/DataDog/ecommerce-workshop/tree/main/deploy/generic-k8s/ecommerce-app)
 
-# Prerequisites
+## Prerequisites
 
 To run this code you will need the following:
 
@@ -18,7 +20,7 @@ To run this code you will need the following:
 5. If you are using TFC. We need to connect your Github account to TFC as VCS provider. Details on how to do that are available in this Tutorial: [Configure GitHub.com Access through OAuth](https://developer.hashicorp.com/terraform/tutorials/cloud/github-oauth?in=terraform%2Fcloud)
 6. Fork this repository
 
-# Content
+## Content
 
 Each folder contains a few different configurations.
 
@@ -35,7 +37,7 @@ Each folder contains a few different configurations.
   * Create monitors in Datadog
 * **eCommerce_app/**: Kubernetes yaml manifest for Datadog eCommerce app. The yaml manifest have been converted into HCL by means of [tfk8s tool](https://github.com/jrhouston/tfk8s). Once we have migrated the manifest from yaml to HCL we have gone an step further with the frontend deployment and asociated service to use ` kubernetes_deployment` and `kubernetes_service` resources.
 
-# Setup
+## Setup
 
 We are going to create a workspace for the three folders where we have the Terraform code. The steps are the followings:
 
@@ -124,11 +126,11 @@ If you want you can automate the execution of the workspaces datadog by means of
 
 ![1669635039231](image/README/1669635039231.png)
 
-# Implementation.
+## Implementation.
 
 Once you have completed the set up, start by creating a **run** (Plan + Apply) of **eks-cluster workspace**. Once completed you should generate another **run** for **Kubernetes_APP** and finally for **datadog** workspaces  (not needed if using Run Triggers).
 
-# Clean-up
+## Clean-up
 
 Start by destroying the **datadog** workspace, followed by **Kubernetes_APP** and once completed finish with the **eks-cluster** workspace.
 
