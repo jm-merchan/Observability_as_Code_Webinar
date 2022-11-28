@@ -1,4 +1,4 @@
-# Deploying Dashboards, Monitors and Synthetic Test in Datadog
+# Deploying Datadog Agent and Applications.
 
 This repo is based on [Automate Monitoring with the Terraform Datadog Provider tutorial](https://developer.hashicorp.com/terraform/tutorials/applications/datadog-provider), which has been extended to deploy the eCommerce application using HCL.
 
