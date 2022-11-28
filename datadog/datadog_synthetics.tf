@@ -4,7 +4,7 @@ resource "datadog_synthetics_test" "beacon" {
 
   request_definition {
     method = "GET"
-    url    = "http://${kubernetes_service.beacon.status.0.load_balancer.0.ingress.0.hostname}:8080"
+    url    = "http://${data.kubernetes_service.beacon.status.0.load_balancer.0.ingress.0.hostname}:8080"
   }
 
   assertion {
@@ -32,7 +32,7 @@ resource "datadog_synthetics_test" "eCommerce" {
 
   request_definition {
     method = "GET"
-    url    = "http://${kubernetes_service.frontend.status.0.load_balancer.0.ingress.0.hostname}"
+    url    = "http://${data.kubernetes_service.frontend.status.0.load_balancer.0.ingress.0.hostname}"
   }
 
   assertion {
@@ -60,7 +60,7 @@ resource "datadog_synthetics_test" "eCommerce_browser" {
 
   request_definition {
     method = "GET"
-    url    = "http://${kubernetes_service.frontend.status.0.load_balancer.0.ingress.0.hostname}"
+    url    = "http://${data.kubernetes_service.frontend.status.0.load_balancer.0.ingress.0.hostname}"
   }
 
   assertion {

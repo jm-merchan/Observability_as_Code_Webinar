@@ -99,7 +99,7 @@ resource "datadog_synthetics_test" "tfer--synthetics_ahg-4qy-te5" {
     port                    = "0"
     should_track_hops       = "false"
     timeout                 = "0"
-    url                     = "http://${kubernetes_service.frontend.status.0.load_balancer.0.ingress.0.hostname}"
+    url                     = "http://${data.kubernetes_service.frontend.status.0.load_balancer.0.ingress.0.hostname}"
   }
 
   status = "live"
