@@ -81,3 +81,17 @@ Finally, the helm chart values have been extended with the following values
     value = "ecommerce"
   }
 ```
+
+---
+
+Use the output variables to show and connect with the applications deployed.
+
+![1669636063030](image/README/1669636063030.png)
+
+**frontend output** shows the Datadog Ecommerce Application
+
+![1669636094286](image/README/1669636094286.png)
+
+whereas the **web_endpoint** url is for a simple app based on NGINX.
+
+![1669636168299](image/README/1669636168299.png)

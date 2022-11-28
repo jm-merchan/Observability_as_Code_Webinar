@@ -1,19 +1,19 @@
 # Deploying Dashboards, Monitors and Synthetic Test in Datadog
 
-This repo is based on [Automate Monitoring with the Terraform Datadog Provider tutorial](https://developer.hashicorp.com/terraform/tutorials/applications/datadog-provider), which has been extended to deploy the eCommerce application using HCL.
+We have taken some examples from the original "[observability as code webminar]()(https://github.com/hashicorp/observability-as-code)" and extended it with more monitors, synthetic tests and dashboards.
 
-If you want to run this code locally update the kubernetes.tf file with the following
+If you want to run this code locally update the terraform.tf file with the following
 
 Instead of this
 
 ```bash
-data "terraform_remote_state" "eks" {
+data "terraform_remote_state" "k8s" {
   backend = "remote"
 
   config = {
     organization = var.org_name
     workspaces = {
-      name = "eks-cluster"
+      name = "Kubernetes_App"
     }
   }
 }
@@ -22,11 +22,11 @@ data "terraform_remote_state" "eks" {
 Use this
 
 ```bash
-data "terraform_remote_state" "eks" {
+data "terraform_remote_state" "k8s" {
   backend = "local"
 
   config = {
-    path = "../eks-cluster/terraform.tfstate"
+    path = "../Kubernetes_App/terraform.tfstate"
   }
 }
 ```
@@ -37,47 +37,16 @@ You can define the rest of the variables using a **tfvars** file
 
 ---
 
-The files advertisements.tf, db.tf, discount.tf and frontend.tf are the result of running
+Results in Datadog
 
-```bash
-tfk8s -f input.yaml -o output.tf
-```
+1. Dashboards
 
-on the different yaml manifest that comprised the eCommerce application, where input and output should be changed with the name portion of the manifest (advertisement, db, and so on). They have made available within the eCommerce_app folder and have been taken from the original repository [DataDog/ecommerce-workshop](https://github.com/DataDog/ecommerce-workshop/tree/main/deploy/generic-k8s/ecommerce-app).
+![1669636300132](image/README/1669636300132.png)
 
-`kubernetes_manifest` resource API do not expose details of the Kubernetes API objets and for that reason, we have modified the `frontend deployment` and `service` so we can output the service FQDN. With that service FQDN we can then create a synthetic test. Therefore, `frontend.tf` resources do not follow the same approach as `advertisement.tf`, `db.tf` and `discounts.tf`.
+2. Monitors
 
-Finally, the helm chart values have been extended with the following values
+![1669636402078](image/README/1669636402078.png)
 
-```bash
+3. Synthetic Tests
 
-  set {
-    name  = "datadog.apm.portEnabled"
-    value = true
-  }
-
-  set {
-    name  = "datadog.processAgent.enabled"
-    value = true
-  }
-
-  set {
-    name  = "datadog.networkMonitoring.enabled"
-    value = true
-  }
-
-  set {
-    name  = "datadog.kubelet.tlsVerify"
-    value = false
-  }
-
-  set {
-    name  = "datadog.processAgent.processCollection"
-    value = true
-  }
-
-  set {
-    name  = "datadog.clusterName"
-    value = "ecommerce"
-  }
-```
+![1669636441994](image/README/1669636441994.png)
