@@ -77,7 +77,7 @@ resource "helm_release" "datadog_agent" {
     value = "HostToContainer"
   }
   set {
-    name  = "datadog.cluster_name"
+    name  = "datadog.clusterName"
     value = "ecommerce"
   }
   set {
