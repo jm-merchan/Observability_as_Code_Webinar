@@ -20,7 +20,6 @@ variable "org_name" {
   type = string
 }
 
-
 variable "DD_CLIENT_TOKEN" {
   type = string
 }
@@ -28,8 +27,8 @@ variable "DD_CLIENT_TOKEN" {
 variable "DD_APPLICATION_ID" {
   type = string
 }
-
+/*
 variable "DD_CLIENT_ID" {
   type = string
 }
-
+*/

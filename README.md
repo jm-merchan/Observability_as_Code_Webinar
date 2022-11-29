@@ -107,7 +107,6 @@ The following variables must be set per Workspace:
 * datadog_app_key (terraform): Datadog API Key (set as sensitive)
 * DD_CLIENT_TOKEN: RUM client Token
 * DD_APPLICATION_ID: RUM application Token
-* DD_CLIENT_ID: RUM client ID
 
 > Variable shared among workspaces can be defined as "Variable sets" and then associated to specific workspaces. This has two benefits:
 
