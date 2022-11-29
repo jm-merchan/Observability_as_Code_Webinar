@@ -129,6 +129,8 @@ If you want you can automate the execution of the workspaces datadog by means of
 
 Once you have completed the set up, start by creating a **run** (Plan + Apply) of **eks-cluster workspace**. Once completed you should generate another **run** for **Kubernetes_APP** and finally for **datadog** workspaces  (not needed if using Run Triggers).
 
+It **must** be done in that order because of the remote-state dependency between Kubernetes_App and eks-cluster and between datadog and Kubernetes_App workspaces.
+
 ## Clean-up
 
 Start by destroying the **datadog** workspace, followed by **Kubernetes_APP** and once completed finish with the **eks-cluster** workspace.
