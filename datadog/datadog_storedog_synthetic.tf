@@ -54,7 +54,7 @@ resource "datadog_synthetics_test" "tfer--synthetics_r4s-j25-bv7" {
   }
 
   device_ids = ["chrome.laptop_large"]
-  locations  = ["aws:eu-central-1"]
+  locations  = ["aws:${var.aws_region}"]
   message    = "eCommerce Application is not responding"
   name       = "Checkout eCommerce app via browser"
 
@@ -74,7 +74,7 @@ resource "datadog_synthetics_test" "tfer--synthetics_r4s-j25-bv7" {
       renotify_interval = "0"
     }
 
-    monitor_priority = "0"
+    monitor_priority = "1"
     no_screenshot    = "false"
 
     retry {
@@ -98,7 +98,7 @@ resource "datadog_synthetics_test" "tfer--synthetics_r4s-j25-bv7" {
     port                    = "0"
     should_track_hops       = "false"
     timeout                 = "0"
-    url                     = "http://aa9a8d549471642f3a3a765c2c67262e-224835774.eu-central-1.elb.amazonaws.com"
+    url                     = data.terraform_remote_state.k8s.outputs.frontend
   }
 
   status = "live"
