@@ -33,7 +33,7 @@ Each folder contains a few different configurations.
 * **datadog/**: Terraform configuration to:
 
   * Create dashboards in Datadog
-  * Create synthetic test in Datadog
+  * Create synthetic tests in Datadog
   * Create monitors in Datadog
 * **eCommerce_app/**: Kubernetes yaml manifest for Datadog eCommerce app. The yaml manifest have been converted into HCL by means of [tfk8s tool](https://github.com/jrhouston/tfk8s). Once we have migrated the manifest from yaml to HCL we have gone an step further with the frontend deployment and asociated service to use ` kubernetes_deployment` and `kubernetes_service` resources.
 
