@@ -1,4 +1,4 @@
-resource "datadog_synthetics_test" "tfer--synthetics_ahg-4qy-te5" {
+resource "datadog_synthetics_test" "tfer--synthetics_r4s-j25-bv7" {
   browser_step {
     allow_failure        = "false"
     force_element_update = "false"
@@ -7,7 +7,7 @@ resource "datadog_synthetics_test" "tfer--synthetics_ahg-4qy-te5" {
 
     params {
       delay      = "0"
-      element    = "{\"multiLocator\":{\"ab\":\"/*[local-name()=\\\"html\\\"][1]/*[local-name()=\\\"body\\\"][1]/*[local-name()=\\\"div\\\"][2]/*[local-name()=\\\"div\\\"][1]/*[local-name()=\\\"main\\\"][1]/*[local-name()=\\\"div\\\"][1]/*[local-name()=\\\"div\\\"][2]/*[local-name()=\\\"div\\\"][1]/*[local-name()=\\\"div\\\"][1]/*[local-name()=\\\"div\\\"][2]/*[local-name()=\\\"form\\\"][1]/*[local-name()=\\\"div\\\"][1]/*[local-name()=\\\"div\\\"][1]/*[local-name()=\\\"div\\\"][2]/*[local-name()=\\\"div\\\"][1]/*[local-name()=\\\"div\\\"][1]/*[local-name()=\\\"button\\\"][1]\",\"at\":\"/descendant::*[@name=\\\"button\\\"]\",\"cl\":\"/descendant::*[contains(concat(' ', normalize-space(@class), ' '), \\\" input-group-append \\\")]/descendant::*[contains(concat(' ', normalize-space(@class), ' '), \\\" btn \\\")]\",\"clt\":\"/descendant::*[contains(concat(' ', normalize-space(@class), ' '), \\\" input-group-append \\\")]/descendant::*[contains(concat(' ', normalize-space(@class), ' '), \\\" btn \\\")]\",\"co\":\"[{\\\"text\\\":\\\"add to cart\\\",\\\"textType\\\":\\\"directText\\\"}]\",\"ro\":\"//*[local-name()=\\\"button\\\"]\"},\"targetOuterHTML\":\"<button name=\\\"button\\\" type=\\\"submit\\\" class=\\\"btn btn-success\\\" id=\\\"add-to-cart-button\\\">\\n                  Add To Cart\\n</button>\",\"url\":\"http://a087d5e0fb2d2474889afeb586e2ba1d-853447894.us-east-1.elb.amazonaws.com/products/datadog-tote\"}"
+      element    = "{\"multiLocator\":{\"ab\":\"/*[local-name()=\\\"html\\\"][1]/*[local-name()=\\\"body\\\"][1]/*[local-name()=\\\"div\\\"][2]/*[local-name()=\\\"div\\\"][1]/*[local-name()=\\\"main\\\"][1]/*[local-name()=\\\"div\\\"][1]/*[local-name()=\\\"div\\\"][2]/*[local-name()=\\\"div\\\"][1]/*[local-name()=\\\"div\\\"][1]/*[local-name()=\\\"div\\\"][2]/*[local-name()=\\\"form\\\"][1]/*[local-name()=\\\"div\\\"][1]/*[local-name()=\\\"div\\\"][1]/*[local-name()=\\\"div\\\"][2]/*[local-name()=\\\"div\\\"][1]/*[local-name()=\\\"div\\\"][1]/*[local-name()=\\\"button\\\"][1]\",\"at\":\"/descendant::*[@name=\\\"button\\\"]\",\"cl\":\"/descendant::*[contains(concat(' ', normalize-space(@class), ' '), \\\" input-group-append \\\")]/descendant::*[contains(concat(' ', normalize-space(@class), ' '), \\\" btn \\\")]\",\"clt\":\"/descendant::*[contains(concat(' ', normalize-space(@class), ' '), \\\" input-group-append \\\")]/descendant::*[contains(concat(' ', normalize-space(@class), ' '), \\\" btn \\\")]\",\"co\":\"[{\\\"text\\\":\\\"add to cart\\\",\\\"textType\\\":\\\"directText\\\"}]\",\"ro\":\"//*[local-name()=\\\"button\\\"]\"},\"targetOuterHTML\":\"<button name=\\\"button\\\" type=\\\"submit\\\" class=\\\"btn btn-success\\\" id=\\\"add-to-cart-button\\\">\\n                  Add To Cart\\n</button>\",\"url\":\"http://aa9a8d549471642f3a3a765c2c67262e-224835774.eu-central-1.elb.amazonaws.com/products/datadog-tote\"}"
       with_click = "false"
       x          = "0"
       y          = "0"
@@ -21,11 +21,11 @@ resource "datadog_synthetics_test" "tfer--synthetics_ahg-4qy-te5" {
     allow_failure        = "false"
     force_element_update = "false"
     is_critical          = "true"
-    name                 = "Click on image \"Datadog Tote\""
+    name                 = "Click on span \"Datadog Tote\""
 
     params {
       delay      = "0"
-      element    = "{\"multiLocator\":{\"ab\":\"/*[local-name()=\\\"html\\\"][1]/*[local-name()=\\\"body\\\"][1]/*[local-name()=\\\"div\\\"][2]/*[local-name()=\\\"div\\\"][1]/*[local-name()=\\\"main\\\"][1]/*[local-name()=\\\"div\\\"][1]/*[local-name()=\\\"div\\\"][2]/*[local-name()=\\\"div\\\"][1]/*[local-name()=\\\"div\\\"][1]/*[local-name()=\\\"div\\\"][1]/*[local-name()=\\\"a\\\"][1]/*[local-name()=\\\"img\\\"][1]\",\"at\":\"/descendant::*[@alt=\\\"Datadog Tote\\\"]\",\"cl\":\"/descendant::*[contains(concat(' ', normalize-space(@class), ' '), \\\" mt-4 \\\")][2]/*[local-name()=\\\"div\\\"][1]/*[local-name()=\\\"div\\\"][2]/*[local-name()=\\\"div\\\"][1]/descendant::*[contains(concat(' ', normalize-space(@class), ' '), \\\" mx-auto \\\")]\",\"clt\":\"/descendant::*[contains(concat(' ', normalize-space(@class), ' '), \\\" mt-4 \\\")][2]/*[local-name()=\\\"div\\\"][1]/*[local-name()=\\\"div\\\"][2]/*[local-name()=\\\"div\\\"][1]/descendant::*[contains(concat(' ', normalize-space(@class), ' '), \\\" mx-auto \\\")]\",\"co\":\"[{\\\"text\\\":\\\"datadog tote\\\",\\\"textType\\\":\\\"alt\\\"}]\",\"ro\":\"//*[@alt=\\\"Datadog Tote\\\"]\"},\"targetOuterHTML\":\"<img itemprop=\\\"image\\\" class=\\\"d-block mx-auto\\\" alt=\\\"Datadog Tote\\\" src=\\\"/assets/noimage/small-1eaf254c069b00a8a692912bddd1660da5f1f80ac202c6bdc4d81b40fd2e0792.png\\\">\",\"url\":\"http://a087d5e0fb2d2474889afeb586e2ba1d-853447894.us-east-1.elb.amazonaws.com/\"}"
+      element    = "{\"multiLocator\":{\"ab\":\"/*[local-name()=\\\"html\\\"][1]/*[local-name()=\\\"body\\\"][1]/*[local-name()=\\\"div\\\"][2]/*[local-name()=\\\"div\\\"][1]/*[local-name()=\\\"main\\\"][1]/*[local-name()=\\\"div\\\"][1]/*[local-name()=\\\"div\\\"][2]/*[local-name()=\\\"div\\\"][1]/*[local-name()=\\\"div\\\"][1]/*[local-name()=\\\"div\\\"][1]/*[local-name()=\\\"a\\\"][1]/*[local-name()=\\\"span\\\"][1]\",\"at\":\"/descendant::*[@title=\\\"Datadog Tote\\\"]\",\"cl\":\"/descendant::*[contains(concat(' ', normalize-space(@class), ' '), \\\" mt-4 \\\")][2]/*[local-name()=\\\"div\\\"][1]/*[local-name()=\\\"div\\\"][2]/*[local-name()=\\\"div\\\"][1]/descendant::*[contains(concat(' ', normalize-space(@class), ' '), \\\" info \\\")]\",\"clt\":\"/descendant::*[text()[normalize-space(translate(., 'ABCDEFGHIJKLMNOPQRSTUVWXYZÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏÐÑÒÓÔÕÖØÙÚÛÜÝÞŸŽŠŒ', 'abcdefghijklmnopqrstuvwxyzàáâãäåæçèéêëìíîïðñòóôõöøùúûüýþÿžšœ')) = \\\"datadog tote\\\"]]\",\"co\":\"[{\\\"text\\\":\\\"datadog tote\\\",\\\"textType\\\":\\\"directText\\\"}]\",\"ro\":\"//*[text()[normalize-space(translate(., 'ABCDEFGHIJKLMNOPQRSTUVWXYZÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏÐÑÒÓÔÕÖØÙÚÛÜÝÞŸŽŠŒ', 'abcdefghijklmnopqrstuvwxyzàáâãäåæçèéêëìíîïðñòóôõöøùúûüýþÿžšœ')) = \\\"datadog tote\\\"]]\"},\"targetOuterHTML\":\"<span class=\\\"info mt-3 d-block\\\" itemprop=\\\"name\\\" title=\\\"Datadog Tote\\\">Datadog Tote</span>\",\"url\":\"http://aa9a8d549471642f3a3a765c2c67262e-224835774.eu-central-1.elb.amazonaws.com/\"}"
       with_click = "false"
       x          = "0"
       y          = "0"
@@ -54,9 +54,9 @@ resource "datadog_synthetics_test" "tfer--synthetics_ahg-4qy-te5" {
   }
 
   device_ids = ["chrome.laptop_large"]
-  locations  = ["aws:${var.aws_region}"]
-  message    = "eCommerce Application is not responding @jaime.alonso@datadoghq.com"
-  name       = "Checkout test"
+  locations  = ["aws:eu-central-1"]
+  message    = "eCommerce Application is not responding"
+  name       = "Checkout eCommerce app via browser"
 
   options_list {
     accept_self_signed              = "false"
@@ -74,7 +74,7 @@ resource "datadog_synthetics_test" "tfer--synthetics_ahg-4qy-te5" {
       renotify_interval = "0"
     }
 
-    monitor_priority = "1"
+    monitor_priority = "0"
     no_screenshot    = "false"
 
     retry {
@@ -83,9 +83,8 @@ resource "datadog_synthetics_test" "tfer--synthetics_ahg-4qy-te5" {
     }
 
     rum_settings {
-      application_id  = var.DD_APPLICATION_ID
-      client_token_id = var.DD_CLIENT_ID
-      is_enabled      = "true"
+      client_token_id = "0"
+      is_enabled      = "false"
     }
 
     tick_every = "300"
@@ -99,10 +98,10 @@ resource "datadog_synthetics_test" "tfer--synthetics_ahg-4qy-te5" {
     port                    = "0"
     should_track_hops       = "false"
     timeout                 = "0"
-    url                     = data.terraform_remote_state.k8s.outputs.frontend
+    url                     = "http://aa9a8d549471642f3a3a765c2c67262e-224835774.eu-central-1.elb.amazonaws.com"
   }
 
   status = "live"
-  tags   = ["app:ecommerce", "tags.datadoghq.com/env:development", "service: store-frontend"]
+  tags   = ["app:ecommerce", "env:development", "service:store-frontend"]
   type   = "browser"
 }
